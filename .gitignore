@@ -1,0 +1,3 @@
+app/build/
+*.apk
+local.properties
