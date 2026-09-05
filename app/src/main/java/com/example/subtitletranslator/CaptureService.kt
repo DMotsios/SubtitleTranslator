@@ -49,6 +49,17 @@ class CaptureService : Service() {
         val projectionData =
             intent?.getParcelableExtra<Intent>("data") ?: return START_NOT_STICKY
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "subtitle",
+                "Subtitle Translator",
+                NotificationManager.IMPORTANCE_LOW
+            )
+            val notificationManager =
+                getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+
         startForeground(
             1,
             NotificationCompat.Builder(this, "subtitle")
